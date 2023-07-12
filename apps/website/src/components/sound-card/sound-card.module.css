@@ -1,0 +1,49 @@
+.soundCard {
+  @apply rounded-sm flex flex-row gap-2 transition bg-zinc-800 bg-opacity-0 hover:bg-opacity-50 overflow-hidden cursor-pointer items-center;
+  &:hover > .actionSection {
+    @apply opacity-100;
+  }
+}
+
+.thumbnailSection {
+  @apply rounded-sm h-16 w-16 relative overflow-hidden;
+}
+
+.thumbnail {
+  @apply h-full w-full object-cover;
+}
+
+.metadataSection {
+  @apply pb-1 truncate flex flex-col;
+}
+
+.sep {
+  @apply flex-grow flex-shrink;
+}
+
+.actionSection {
+  @apply p-0.5 opacity-5 transition;
+}
+
+.action {
+  @apply text-3xl p-2;
+}
+
+.length {
+  @apply block absolute right-0 bottom-0 px-1 text-xs bg-zinc-800 rounded-tl-lg shadow-sm;
+}
+
+.title {
+  @apply font-semibold text-base -mb-1;
+}
+
+.artist {
+  @apply text-sm;
+}
+
+.tags {
+  @apply text-xs flex flex-row gap-1;
+  >*:hover {
+    @apply text-slate-200;
+  }
+}

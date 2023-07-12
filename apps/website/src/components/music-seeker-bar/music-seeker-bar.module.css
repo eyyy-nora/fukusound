@@ -1,0 +1,163 @@
+.musicSeekerBar {
+  @apply md:h-14 h-32 w-full bg-zinc-800 flex md:flex-row flex-col md:items-center items-stretch px-3 md:gap-6 justify-between select-none sticky bottom-0 z-10;
+}
+
+.metadata {
+  @apply flex flex-row gap-4 w-full lg:w-64 md:w-32 pt-1 lg:pt-0;
+}
+
+.thumbnail {
+  @apply h-11 w-11 rounded shadow-inner object-cover;
+}
+
+.info {
+  @apply flex flex-col flex-shrink truncate;
+}
+
+.title {
+  @apply text-lg font-semibold whitespace-nowrap truncate;
+}
+
+.artist {
+  @apply -mt-1.5 text-sm truncate;
+}
+
+.seeker {
+  @apply flex-grow flex flex-row items-center gap-3;
+}
+
+.timePlayed {
+  @apply text-sm;
+}
+
+.duration {
+  @apply text-sm;
+}
+
+.progressBar {
+  @apply bg-zinc-600 rounded-xl h-2 flex-grow overflow-hidden shadow-inner;
+}
+
+.progress {
+  @apply bg-rose-300 opacity-75 hover:opacity-100 transition h-full;
+  --progress: 0;
+  width: calc(100% * var(--progress));
+}
+
+.controls {
+  @apply text-3xl flex flex-row items-center;
+}
+
+.controlPrev {
+  @apply text-3xl rounded-l-full hover:bg-zinc-700 hover:text-slate-200 pl-2 pr-3 border-2 border-zinc-700 border-opacity-40 transition;
+}
+
+.controlPlay {
+  @apply text-4xl rounded-full bg-zinc-800 hover:bg-zinc-700 hover:text-slate-200 p-1 z-10 -mx-2 border-2 border-zinc-700 border-opacity-40 transition;
+}
+
+.controlNext {
+  @apply text-3xl rounded-r-full hover:bg-zinc-700 hover:text-slate-200 pr-2 pl-3 border-2 border-zinc-700 border-opacity-40 transition;
+}
+
+.controlRepeat {
+  @apply text-2xl hover:text-slate-200 transition rounded;
+}
+
+.controlShuffle {
+  @apply text-2xl hover:text-slate-200 transition rounded;
+}
+
+.controlSeparator {
+  @apply flex-grow flex-shrink md:flex-shrink-0 md:px-3;
+}
+
+.controlVolume {
+  @apply text-3xl rounded-full p-0.5 transition relative z-0;
+  &:hover, &:focus-within, &:focus {
+    @apply bg-zinc-700 text-slate-200;
+    > .volumePopover {
+      @apply scale-y-100 opacity-100 pointer-events-auto;
+    }
+  }
+}
+
+.volumePopover {
+  @apply absolute select-none left-1 right-1 bottom-1 h-48 bg-zinc-700 rounded-full -z-10 flex flex-col items-center gap-0.5 pt-3 scale-y-0 opacity-0 transition duration-200 origin-bottom;
+}
+
+.volumeSlider {
+  @apply h-32 w-2 bg-zinc-500 rounded-full relative overflow-hidden;
+}
+
+.volumeSliderFill {
+  @apply w-full bg-rose-300 absolute bottom-0 rounded-b-full;
+  --volume: 0;
+  height: calc(100% * var(--volume));
+}
+
+.volumeDisplay {
+  @apply text-sm;
+}
+
+.toggleQueue {
+  @apply text-2xl hover:bg-zinc-700 rounded-full p-1 transition;
+}
+
+.toggleActive {
+  @apply text-slate-50 bg-zinc-700;
+}
+
+.queue {
+  @apply absolute bottom-16 left-2 right-0 rounded-lg max-w-sm flex flex-col gap-0.5 bg-zinc-800 shadow-lg overflow-y-auto opacity-0 transition pointer-events-none;
+  transform: scaleY(95%) translateY(5%);
+  transform-origin: bottom;
+  max-height: calc(80vh - theme("spacing.32"));
+}
+
+.queue.open {
+  @apply opacity-100 pointer-events-auto;
+  transform: scaleY(100%) translateY(0%);
+}
+
+.queueHeader {
+  @apply sticky top-0 left-0 right-0 border-b border-zinc-700 border-opacity-40 flex flex-row justify-stretch bg-zinc-700;
+}
+
+.queueTitle {
+  @apply text-slate-300 text-xl flex-grow px-2 text-center bg-transparent outline-none border-none ring-0;
+}
+
+.queueSave {
+  @apply p-1;
+}
+
+.queueEntry {
+  @apply flex flex-row h-12 gap-2 transition items-center hover:bg-zinc-700 flex-nowrap;
+  &:hover > .queueActions {
+    @apply opacity-100;
+  }
+}
+
+.queueListButton {
+  @apply flex flex-row h-full items-start flex-nowrap truncate flex-shrink flex-grow gap-2 pr-2;
+}
+
+.queueActive {
+  @apply text-slate-50;
+}
+
+.queueMeta {
+  @apply flex flex-col truncate flex-grow flex-shrink items-start;
+}
+
+.queueThumbnail {
+  @apply h-12 w-12 object-cover;
+}
+
+.queueActions {
+  @apply text-lg opacity-0 transition pr-2 text-slate-50;
+  &>* {
+    @apply p-1 rounded-full hover:bg-zinc-600 transition;
+  }
+}

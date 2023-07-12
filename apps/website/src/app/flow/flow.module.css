@@ -1,0 +1,14 @@
+
+.connectionPoint {
+  @apply w-4 h-3 rounded border-2 border-zinc-500 bg-zinc-700 -mb-0.5 cursor-crosshair hover:bg-zinc-400 transition;
+
+  &.active {
+    @apply bg-zinc-600;
+    --connection-color: 52, 211, 153;
+    border-color: rgb(var(--connection-color), var(--tw-border-opacity));
+  }
+
+  &.constant {
+    @apply border-zinc-600 w-3 mx-0.5;
+  }
+}

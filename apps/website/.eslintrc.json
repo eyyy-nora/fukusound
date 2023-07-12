@@ -1,0 +1,6 @@
+{
+  "extends": ["next/core-web-vitals", "@fukumong/eslint-config"],
+  "rules": {
+    "@next/next/no-img-element": "off"
+  }
+}

@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-discord: 87, 100, 241;
+}
+
+* {
+  @apply p-0 m-0 box-border ring-rose-400;
+  &>:focus {
+    @apply outline-none ring-4;
+    &:active, &:not(:focus-visible) {
+      @apply ring-0;
+    }
+  }
+}
+
+
+@media (prefers-color-scheme: dark) {
+  :root {}
+}
+
+body {}

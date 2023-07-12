@@ -1,0 +1,18 @@
+.wrapper {
+  @apply flex-grow flex-shrink flex flex-row items-center justify-center my-8 px-8;
+}
+
+.searchContainer {
+  @apply flex flex-row w-full items-center justify-center text-zinc-400 text-xl rounded-full transition max-w-lg;
+  &:has(:focus-visible) {
+    @apply ring-4;
+  }
+}
+
+.searchInput {
+  @apply rounded-l-full flex-grow flex-shrink bg-zinc-700 h-10 pl-6 pr-4 font-semibold outline-none focus:bg-zinc-600 focus:text-zinc-200 transition ring-0 min-w-[10px];
+}
+
+.searchButton {
+  @apply px-4 bg-zinc-700 text-2xl font-semibold h-10 rounded-r-full outline-none ring-0;
+}

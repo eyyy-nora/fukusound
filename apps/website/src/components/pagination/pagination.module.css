@@ -1,0 +1,19 @@
+.pagination {
+  @apply flex flex-row gap-2 text-lg text-slate-300 font-semibold;
+}
+
+.pagingButton {
+  @apply bg-zinc-800 hover:bg-zinc-700 transition py-1 text-center rounded-sm w-10 shadow;
+}
+
+.disabled {
+  @apply bg-zinc-800 bg-opacity-60 hover:bg-zinc-800 shadow-none cursor-default pointer-events-none;
+}
+
+.active {
+  @apply bg-zinc-700 bg-opacity-75 text-slate-100 shadow-none cursor-default pointer-events-none;
+}
+
+.pagingExtra {
+  @apply px-2.5;
+}

@@ -1,0 +1,55 @@
+.navigation {
+  @apply flex flex-row items-center justify-between flex-grow-0 flex-shrink-0 top-0 left-0 right-0 bg-zinc-700;
+}
+
+.navList {
+  @apply flex flex-row items-center pl-6 pr-6 text-zinc-400 text-lg font-semibold;
+}
+
+.navColonThree {
+  @apply text-3xl py-2 mr-8 text-violet-400 transition cursor-default select-none hover:animate-spinnie;
+  animation-duration: 100ms;
+}
+
+.navItem {
+  @apply transition hover:text-zinc-300 focus-within:text-zinc-300 max-w-md truncate;
+  >*{
+    @apply py-3 px-4 inline-block focus:ring-4;
+  }
+}
+
+.active {
+  @apply text-zinc-200 hover:text-zinc-200 cursor-default pointer-events-none;
+}
+
+.sep {
+  @apply px-2;
+}
+
+.navEnd {
+  @apply px-4;
+}
+
+.login {
+  @apply bg-indigo-400 bg-opacity-90 py-0.5 px-5 rounded text-slate-50 font-semibold text-lg shadow hover:bg-opacity-100 transition;
+}
+
+.user {
+  @apply flex flex-row h-9 gap-2 max-w-[150px] justify-end;
+}
+
+.avatar {
+  @apply rounded-full;
+}
+
+.userInfo {
+  @apply flex flex-col items-center truncate -mt-1;
+}
+
+.username {
+  @apply text-slate-200 font-semibold;
+}
+
+.logout {
+  @apply text-rose-400 hover:text-rose-300 bg-opacity-0 px-0 py-0 font-semibold text-sm -mt-1 transition;
+}
