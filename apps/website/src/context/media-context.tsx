@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from "axios";
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { createContext, useContext, useMemo, useState } from "react";
 import { apiClient } from "src/util/api-client";
 import type { Sound } from "@fukumong/database";
 
