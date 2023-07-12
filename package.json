@@ -1,0 +1,22 @@
+{
+  "name": "discord-soundbot",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "preinstall": "npx only-allow pnpm",
+    "packages:dev": "pnpm run --parallel -r dev",
+    "packages:build": "pnpm run -r build",
+    "packages:lint": "pnpm run -r lint"
+  },
+  "author": "Nora Reichwald <nora@reichwald.me> (https://reichwald.me/)",
+  "license": "MIT",
+  "url": "https://reichwald.me/",
+  "devDependencies": {
+    "tsup": "^7.1.0"
+  },
+  "pnpm": {
+    "peerDependencyRules": {
+      "allowAny": ["typescript", "postcss", "tailwindcss"]
+    }
+  }
+}

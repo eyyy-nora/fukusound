@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "composite": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "lib": ["esnext"],
+    "allowSyntheticDefaultImports": true
+  },
+  "include": [
+    "package.json",
+    "tsup-defaults.ts",
+    "packages/*/tsup.config.ts",
+    "packages/*/package.json",
+    "packages/*/src/**/*.ts",
+    "packages/*/test/**/*.ts",
+    "packages/*/scripts/**/*.ts"
+  ]
+}

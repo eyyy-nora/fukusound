@@ -1,0 +1,15 @@
+.idea
+.vscode
+.eclipse
+
+.db-data
+node_modules
+
+packages/*/node_modules
+packages/*/dist
+packages/*/coverage
+
+apps/*/node_modules
+apps/*/dist
+apps/*/.next
+apps/*/coverage

@@ -1,0 +1,6 @@
+{
+  "extends": ["@fukumong/eslint-config"],
+  "rules": {
+    "no-console": "off"
+  }
+}

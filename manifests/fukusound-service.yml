@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: fukusound-website-service
+  labels:
+    app: fukusound
+    ver: service
+spec:
+  selector:
+    app: fukusound
+    type: website-deployment
+  ports:
+    - port: 3000

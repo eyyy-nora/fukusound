@@ -1,0 +1,43 @@
+{
+  "name": "@fukumong/database",
+  "version": "0.0.0",
+  "description": "database connection and entities",
+  "since": 2022,
+  "author": "Nora Reichwald <nora@reichwald.me> (https://reichwald.me/)",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsup",
+    "lint": "eslint --ext .ts,.tsx .",
+    "lint:fix": "eslint --fix --ext .ts,.tsx .",
+    "load-env": "dotenv -e ./../../.env.local -e ../../.env",
+    "orm": "pnpm load-env -- ts-node -P . -r @fukumong/loader/text -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
+    "orm:sync": "pnpm orm schema:sync -d src/data-source.ts",
+    "orm:migration:generate": "pnpm orm migration:generate src/migrations/schema-changes -d src/data-source.ts --pretty && pnpm index",
+    "orm:migration:run": "pnpm orm migration:run -d src/data-source.ts",
+    "orm:migration:revert": "pnpm orm migration:revert -d src/data-source.ts",
+    "index": "ctix create -s --noBackup -q '\"' -w -a src -p tsconfig.json"
+  },
+  "dependencies": {
+    "@fukumong/util": "workspace:^",
+    "diff": "^5.1.0",
+    "dotenv": "^16.3.1",
+    "typeorm": "^0.3.17",
+    "connect-typeorm": "^2.0.0"
+  },
+  "devDependencies": {
+    "@fukumong/eslint-config": "workspace:^",
+    "@fukumong/loader": "workspace:^",
+    "@swc/core": "^1.3.66",
+    "eslint": "^8.43.0",
+    "ts-node": "^10.9.1",
+    "tslib": "^2.5.3",
+    "tsup": "^7.0.0",
+    "typescript": "^5.1.3",
+    "tsconfig-paths": "^4.2.0",
+    "dotenv-cli": "^7.2.1",
+    "ctix": "^1.8.2"
+  }
+}

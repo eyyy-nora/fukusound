@@ -1,0 +1,12 @@
+version: '3'
+services:
+  vreiheit_db:
+    image: 'postgres:latest'
+    container_name: fukusound
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./.db-data/:/var/lib/postgresql/data/
+    env_file:
+      - ".env.local"
+      - ".env"

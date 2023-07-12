@@ -1,0 +1,87 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fukusound-ui-deployment
+  labels:
+    app: fukusound
+    type: fukusound-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fukusound
+      type: fukusound-deployment
+  template:
+    metadata:
+      labels:
+        app: fukusound
+        type: fukusound-deployment
+    spec:
+      containers:
+        - name: fukusound-ui
+          image: ghcr.io/eyyy-nora/fukusound-ui
+          ports:
+            - containerPort: 3000
+          env:
+            - name: API_PORT
+              value: "3001"
+            - name: API_HOST
+              value: "fukusound-api"
+            - name: API_URL
+              value: "http://fukusound-api:3001/"
+        - name: fukusound-api
+          image: ghcr.io/eyyy-nora/fukusound-api
+          ports:
+            - containerPort: 3001
+          env:
+            - name: API_SESSION_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: fukusound
+                  key: session_secret
+            - name: API_HOST
+              value: localhost
+            - name: API_PORT
+              value: "3001"
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: fukusound
+                  key: pg_username
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: fukusound
+                  key: pg_password
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: fukusound
+                  key: pg_db
+            - name: POSTGRES_HOST
+              value: fukusound-postgres-service
+            - name: POSTGRES_PORT
+              value: "5432"
+            - name: DISCORD_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: fukusound
+                  key: dc_token
+            - name: DISCORD_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: fukusound
+                  key: dc_client_id
+            - name: DISCORD_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: fukusound
+                  key: dc_client_secret
+            - name: WEBSITE_HOST
+              value: app.fukusound.io
+            - name: WEBSITE_PORT
+              value: "80"
+            - name: WEBSITE_URL
+              value: https://app.fukusound.io/
+            - name: TZ
+              value: "Europe/Berlin"
