@@ -41,8 +41,8 @@ spec:
                   key: pg_db
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
-              name: fukusound_pgdatavol
+              name: fukusound-pgdatavol
       volumes:
-        - name: fukusound_pgdatavol
+        - name: fukusound-pgdatavol
           hostPath:
             path: /opt/fukusound/data
