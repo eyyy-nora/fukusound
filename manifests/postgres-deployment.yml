@@ -27,22 +27,22 @@ spec:
             - name: POSTGRES_USER
               valueFrom:
                 secretKeyRef:
-                  name: fukusound-postgres
-                  key: username
+                  name: fukusound
+                  key: pg_username
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: fukusound-postgres
-                  key: password
+                  name: fukusound
+                  key: pg_password
             - name: POSTGRES_DB
               valueFrom:
                 secretKeyRef:
-                  name: fukusound-postgres
-                  key: db
+                  name: fukusound
+                  key: pg_db
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
-              name: pgdatavol
+              name: fukusound_pgdatavol
       volumes:
-        - name: pgdatavol
+        - name: fukusound_pgdatavol
           hostPath:
             path: /opt/fukusound/data
