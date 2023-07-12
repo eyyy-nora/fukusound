@@ -59,7 +59,7 @@ spec:
                   name: fukusound
                   key: pg_db
             - name: POSTGRES_HOST
-              value: fukusound-postgres-service
+              value: fukusound-postgres
             - name: POSTGRES_PORT
               value: "5432"
             - name: DISCORD_TOKEN
@@ -85,3 +85,31 @@ spec:
               value: https://fukusound.reichwald.me/
             - name: TZ
               value: "Europe/Berlin"
+        - name: fukusound-postgres
+          image: postgres:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5324
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: fukusound
+                  key: pg_username
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: fukusound
+                  key: pg_password
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: fukusound
+                  key: pg_db
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: fukusound-pgdatavol
+      volumes:
+        - name: fukusound-pgdatavol
+          hostPath:
+            path: /opt/fukusound/data
