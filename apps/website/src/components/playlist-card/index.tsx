@@ -1,5 +1,5 @@
 "use client";
-import { MdDeleteOutline, MdOutlinePlayArrow, MdRemove } from "react-icons/md";
+import { MdDeleteOutline, MdOutlinePlayArrow } from "react-icons/md";
 import { useMediaContext } from "src/context/media-context";
 import { apiClient } from "src/util/api-client";
 import classes from "./playlist-card.module.css";

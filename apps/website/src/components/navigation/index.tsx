@@ -64,7 +64,7 @@ export function Navigation({ extra, user }: NavigationProps) {
       <div className={classes.navEnd}>
         {user ? (
           <div className={classes.user}>
-            <img src={user.avatar} className={classes.avatar} />
+            <img src={user.avatar} className={classes.avatar} alt="" />
             <div className={classes.userInfo}>
               <span className={classes.username}>{user.name}</span>
               <button

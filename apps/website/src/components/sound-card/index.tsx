@@ -47,8 +47,8 @@ export function SoundCard({
         <button
           className={classes.action}
           onClick={ev => {
-            if (ev.ctrlKey || ev.shiftKey) actions.queue(id, playlist);
-            else actions.play(id, playlist);
+            if (ev.ctrlKey || ev.shiftKey) actions.queue(id, playlist as any);
+            else actions.play(id, playlist as any);
           }}>
           <MdOutlinePlayArrow />
         </button>

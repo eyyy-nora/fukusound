@@ -171,6 +171,5 @@ export function MediaContextProvider({
     () => ({ actions, state, client }),
     [actions, state, client],
   );
-  useEffect(() => console.log(value), [value]);
   return <context.Provider value={value}>{children}</context.Provider>;
 }
