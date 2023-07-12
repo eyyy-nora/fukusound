@@ -19,10 +19,10 @@ jobs:
           username: ${{ secrets.GH_USERNAME }}
           password: ${{ secrets.GH_TOKEN }}
       - run: |
-          docker build apps/website -t ghcr.io/${{ secrets.GH_USERNAME }}/fukusound-ui:${{ github.sha }} -t ghcr.io/${{ secrets.GH_USERNAME }}/fukusound-ui:latest
+          docker build -f apps/website/Dockerfile -t ghcr.io/${{ secrets.GH_USERNAME }}/fukusound-ui:${{ github.sha }} -t ghcr.io/${{ secrets.GH_USERNAME }}/fukusound-ui:latest
           docker push ghcr.io/${{ secrets.GH_USERNAME }}/fukusound-ui:${{ github.sha }}
           docker push ghcr.io/${{ secrets.GH_USERNAME }}/fukusound-ui:latest
-          docker build apps/service -t ghcr.io/${{ secrets.GH_USERNAME }}/fukusound-api:${{ github.sha }} -t ghcr.io/${{ secrets.GH_USERNAME }}/fukusound-api:latest
+          docker build -f apps/service/Dockerfile -t ghcr.io/${{ secrets.GH_USERNAME }}/fukusound-api:${{ github.sha }} -t ghcr.io/${{ secrets.GH_USERNAME }}/fukusound-api:latest
           docker push ghcr.io/${{ secrets.GH_USERNAME }}/fukusound-api:${{ github.sha }}
           docker push ghcr.io/${{ secrets.GH_USERNAME }}/fukusound-api:latest
       - uses: azure/setup-kubectl@v3
