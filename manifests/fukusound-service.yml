@@ -8,6 +8,6 @@ metadata:
 spec:
   selector:
     app: fukusound
-    type: website-deployment
+    type: fukusound-deployment
   ports:
     - port: 3000
