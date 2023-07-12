@@ -1,8 +1,8 @@
 FROM node:lts
-WORKDIR /service
+WORKDIR /fukusound
 RUN npm i -g pnpm
 COPY . .
 RUN pnpm install
 RUN pnpm packages:build
-WORKDIR /service/apps/service
+WORKDIR /fukusound/apps/service
 CMD ["pnpm", "run", "start"]
