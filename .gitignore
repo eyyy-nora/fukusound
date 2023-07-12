@@ -1,6 +1,7 @@
 .idea
 .vscode
 .eclipse
+.env.local
 
 .db-data
 node_modules
