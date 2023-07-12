@@ -78,10 +78,10 @@ spec:
                   name: fukusound
                   key: dc_client_secret
             - name: WEBSITE_HOST
-              value: app.fukusound.io
+              value: fukusound.reichwald.me
             - name: WEBSITE_PORT
               value: "80"
             - name: WEBSITE_URL
-              value: https://app.fukusound.io/
+              value: https://fukusound.reichwald.me/
             - name: TZ
               value: "Europe/Berlin"
