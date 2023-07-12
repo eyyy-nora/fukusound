@@ -112,4 +112,4 @@ spec:
       volumes:
         - name: fukusound-pgdatavol
           hostPath:
-            path: /opt/fukusound/data
+            path: /opt/fukusound/new-data
