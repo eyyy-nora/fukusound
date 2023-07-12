@@ -10,7 +10,7 @@ export function env<T = string>(
   if (!configured) config({ path: "../../.env.local" });
   const type = typeof defaultValue;
   if (type === "function") return env(key, (defaultValue as () => T)());
-  const value = process.env[key];
+  const value = process.env[key.toUpperCase()];
   switch (type) {
     case "string":
       return (value as T) ?? (defaultValue as T);
