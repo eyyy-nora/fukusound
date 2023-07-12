@@ -28,8 +28,8 @@ export async function main() {
   await step("db: schemas", () =>
     db.query('CREATE SCHEMA IF NOT EXISTS "fukusound";'),
   );
-  await step.prod("db: migrations", () => db.runMigrations());
-  await step.dev("db: sync", () => db.synchronize());
+  // await step.prod("db: migrations", () => db.runMigrations());
+  await step("db: sync", () => db.synchronize());
   await step("discord: init", initDiscord);
   await step("express: init", () => initWebsite(app));
   await step("express: start", r => app.listen(env("api_port", 3001), r));
