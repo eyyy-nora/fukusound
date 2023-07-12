@@ -16,7 +16,7 @@ const nextConfig = {
       { source: "/", destination: "/music" },
       {
         source: "/api/:path*",
-        destination: `${env("api_url", "http://fukusound-api:3001/")}:path*`,
+        destination: `${env("api_url", "http://localhost:3001/")}:path*`,
       },
     ];
   },

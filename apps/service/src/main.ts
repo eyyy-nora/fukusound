@@ -25,6 +25,9 @@ export async function main() {
     next();
   });
   await step("db: init", () => db.initialize());
+  await step("db: schemas", () =>
+    db.query('CREATE SCHEMA IF NOT EXISTS "fukusound";'),
+  );
   await step.prod("db: migrations", () => db.runMigrations());
   await step.dev("db: sync", () => db.synchronize());
   await step("discord: init", initDiscord);
