@@ -1,0 +1,57 @@
+name: deploy main
+on:
+  push:
+    branches:
+      - main
+concurrency: production
+permissions:
+  id-token: write
+  contents: read
+  actions: read
+jobs:
+  deployment:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: azure/docker-login@v1
+        with:
+          login-server: ghcr.io
+          username: ${{ secrets.GH_USERNAME }}
+          password: ${{ secrets.GH_TOKEN }}
+      - run: |
+          docker build apps/website -t ghcr.io/${{ secrets.GH_USERNAME }}/fukusound-ui:${{ github.sha }} -t ghcr.io/${{ secrets.GH_USERNAME }}/fukusound-ui:latest
+          docker push ghcr.io/${{ secrets.GH_USERNAME }}/fukusound-ui:${{ github.sha }}
+          docker push ghcr.io/${{ secrets.GH_USERNAME }}/fukusound-ui:latest
+          docker build apps/service -t ghcr.io/${{ secrets.GH_USERNAME }}/fukusound-api:${{ github.sha }} -t ghcr.io/${{ secrets.GH_USERNAME }}/fukusound-api:latest
+          docker push ghcr.io/${{ secrets.GH_USERNAME }}/fukusound-api:${{ github.sha }}
+          docker push ghcr.io/${{ secrets.GH_USERNAME }}/fukusound-api:latest
+      - uses: azure/setup-kubectl@v3
+      - uses: azure/k8s-set-context@v3
+        with:
+          method: kubeconfig
+          kubeconfig: ${{ secrets.K8_CONFIG }}
+      - uses: azure/k8s-create-secret@v4
+        with:
+          container-registry-url: ghcr.io
+          container-registry-username: ${{ secrets.GH_USERNAME }}
+          container-registry-password: ${{ secrets.GH_TOKEN }}
+          container-registry-email: ${{ secrets.GH_EMAIL }}
+          secret-name: gh-registry-secret
+          namespace: default
+      - uses: azure/k8s-create-secret@v4
+        with:
+          namespace: default
+          secret-type: generic
+          secret-name: fukusound
+          string-data: ${{ secrets.FUKUSOUND_ENV }}
+      - uses: azure/k8s-deploy@v4
+        with:
+          action: deploy
+          strategy: basic
+          manifests: manifests
+          pull-images: false
+          images: |
+            ghcr.io/${{ secrets.GH_USERNAME }}/fukusound-ui:${{ github.sha }}
+            ghcr.io/${{ secrets.GH_USERNAME }}/fukusound-api:${{ github.sha }}
+          imagepullsecrets: |
+            gh-registry-secret
