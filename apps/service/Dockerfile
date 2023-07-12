@@ -4,5 +4,5 @@ RUN npm i -g pnpm
 COPY . .
 RUN pnpm install
 RUN pnpm packages:build
-CD apps/service
+WORKDIR /service/apps/service
 CMD ["pnpm", "run", "start"]
