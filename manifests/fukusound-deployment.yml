@@ -26,9 +26,9 @@ spec:
             - name: API_PORT
               value: "3001"
             - name: API_HOST
-              value: "fukusound-api"
+              value: "localhost"
             - name: API_URL
-              value: "http://fukusound-api:3001/"
+              value: "http://localhost:3001/"
         - name: fukusound-api
           image: ghcr.io/eyyy-nora/fukusound-api
           ports:
@@ -59,7 +59,7 @@ spec:
                   name: fukusound
                   key: pg_db
             - name: POSTGRES_HOST
-              value: fukusound-postgres
+              value: localhost
             - name: POSTGRES_PORT
               value: "5432"
             - name: DISCORD_TOKEN
