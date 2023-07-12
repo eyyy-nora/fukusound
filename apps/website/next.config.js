@@ -14,7 +14,10 @@ const nextConfig = {
   async rewrites() {
     return [
       { source: "/", destination: "/music" },
-      { source: "/api/:path*", destination: `${env("api_url")}:path*` },
+      {
+        source: "/api/:path*",
+        destination: `${env("api_url", "http://fukusound-api:3001/")}:path*`,
+      },
     ];
   },
 };
