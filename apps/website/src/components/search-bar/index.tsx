@@ -19,16 +19,14 @@ function postSong(sound: Partial<Sound>) {
 export function SearchBar(props: SearchBarProps) {
   const [search, setSearch] = useState("");
 
+  const handler = (e: any) => {
+    e.preventDefault();
+    postSong({ source: search }).then(() => location.reload());
+  };
+
   return (
     <div className={classes.wrapper}>
-      <form
-        className={classes.searchContainer}
-        onSubmit={e => {
-          e.preventDefault();
-          postSong({
-            source: search,
-          }).then(() => location.reload());
-        }}>
+      <form className={classes.searchContainer} onSubmit={handler}>
         <input
           type="search"
           size={1}
@@ -43,11 +41,7 @@ export function SearchBar(props: SearchBarProps) {
           type="submit"
           className={classes.searchButton}
           tabIndex={-1}
-          onClick={() =>
-            postSong({
-              source: search,
-            }).then(() => location.reload())
-          }>
+          onClick={handler}>
           <MdSearch />
         </button>
       </form>
