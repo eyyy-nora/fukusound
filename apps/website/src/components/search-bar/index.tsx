@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import { MdSearch } from "react-icons/md";
 import classes from "./SearchBar.module.css";
 import { apiClient } from "src/util/api-client";
@@ -16,14 +17,27 @@ function postSong(sound: Partial<Sound>) {
 }
 
 export function SearchBar(props: SearchBarProps) {
+  const [search, setSearch] = useState("");
+
   return (
     <div className={classes.wrapper}>
-      <div className={classes.searchContainer}>
+      <form
+        className={classes.searchContainer}
+        onSubmit={e => {
+          e.preventDefault();
+          postSong({
+            source: search,
+          }).then(() => location.reload());
+        }}>
         <input
           type="search"
           size={1}
+          value={search}
           className={classes.searchInput}
-          onChange={ev => props.onChange?.(ev.currentTarget.value)}
+          onChange={ev => {
+            props.onChange?.(ev.currentTarget.value);
+            setSearch(ev.currentTarget.value);
+          }}
         />
         <button
           type="submit"
@@ -31,12 +45,12 @@ export function SearchBar(props: SearchBarProps) {
           tabIndex={-1}
           onClick={() =>
             postSong({
-              source: "https://www.youtube.com/watch?v=iatQIC2LiyY",
-            })
+              source: search,
+            }).then(() => location.reload())
           }>
           <MdSearch />
         </button>
-      </div>
+      </form>
     </div>
   );
 }
