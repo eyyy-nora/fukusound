@@ -13,7 +13,7 @@ function postSong(sound: Partial<Sound>) {
     data.append(key, value as any);
     return data;
   }, new FormData());
-  return apiClient().post("/sound", data);
+  return apiClient().post("/sounds", data);
 }
 
 export function SearchBar(props: SearchBarProps) {
