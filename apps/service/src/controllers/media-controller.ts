@@ -278,6 +278,7 @@ class MediaPlayer {
   index: number;
   _player!: AudioPlayer;
   _resource?: AudioResource;
+  _file?: string;
 
   setVolume(volume: number) {
     this.volume = volume;
@@ -302,7 +303,13 @@ class MediaPlayer {
 
   async playSound(sound: Sound) {
     this.media = sound;
-    this._resource = createAudioResource(bufferToStream(sound.data), {
+    if (this._file) {
+      await fs.unlink(this._file);
+      delete this._file;
+    }
+    this._file = `${Date.now()}-${sound.id}.opus`;
+    await fs.writeFile(this._file, sound.data);
+    this._resource = createAudioResource(this._file, {
       inlineVolume: true,
       inputType: StreamType.Opus,
     });
