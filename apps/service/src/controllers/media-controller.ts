@@ -27,6 +27,7 @@ import fs from "node:fs/promises";
 import { discord } from "src/init/discord";
 import { log } from "src/init/util";
 import { Mount } from "src/mount";
+import { bufferToStream } from "src/util/buffer-stream";
 import { EntityNotFoundError } from "typeorm";
 
 function bool(val: any) {
@@ -301,8 +302,7 @@ class MediaPlayer {
 
   async playSound(sound: Sound) {
     this.media = sound;
-    await fs.writeFile("current.mp3", sound.data);
-    this._resource = createAudioResource("current.mp3", {
+    this._resource = createAudioResource(bufferToStream(sound.data), {
       inlineVolume: true,
       inputType: StreamType.Opus,
     });
