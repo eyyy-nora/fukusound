@@ -196,7 +196,6 @@ export class MediaController {
   ) {
     const sound = await Sound.findOne({
       where: { id, ownerId: user.discordId },
-      select: { data: true },
     });
     const player = await this.player(user.discordId);
     player.queueOne(sound);
