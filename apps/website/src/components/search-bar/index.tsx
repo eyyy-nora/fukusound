@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { MdSearch } from "react-icons/md";
 import classes from "./SearchBar.module.css";
 import { apiClient } from "src/util/api-client";
@@ -19,15 +19,16 @@ function postSong(sound: Partial<Sound>) {
 export function SearchBar({ onChange }: SearchBarProps) {
   const [search, setSearch] = useState("");
 
-  const handler = (e: any) => {
-    e.preventDefault();
-    if (/^https?:\/\//.test(search)) {
-      setSearch("");
-      postSong({ source: search }).then(() => location.reload());
-    }
-  };
-
-  useEffect(() => onChange?.(search), [onChange, search]);
+  const handler = useCallback(
+    (e: any) => {
+      e.preventDefault();
+      if (/^https?:\/\//.test(search)) {
+        setSearch("");
+        postSong({ source: search }).then(() => location.reload());
+      }
+    },
+    [search],
+  );
 
   return (
     <div className={classes.wrapper}>
@@ -38,7 +39,7 @@ export function SearchBar({ onChange }: SearchBarProps) {
           value={search}
           className={classes.searchInput}
           onChange={ev => {
-            props.onChange?.(ev.currentTarget.value);
+            onChange?.(ev.currentTarget.value);
             setSearch(ev.currentTarget.value);
           }}
         />

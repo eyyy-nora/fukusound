@@ -1,5 +1,6 @@
+"use client";
 import { useCallback, useState } from "react";
-import { Pagination, PaginationProps } from "src/components/pagination";
+import { Pagination } from "src/components/pagination";
 import { SearchBar } from "src/components/search-bar";
 import { SoundCard } from "src/components/sound-card";
 import { apiClient } from "src/util/api-client";
@@ -21,7 +22,7 @@ export function MusicPageContent({
     (search: string) => {
       apiClient()
         .get("/sounds", {
-          params: { pageSize: data.pageSize, search },
+          params: { pageSize: data.pageSize, search: search || undefined },
         })
         .then(it => setData(it.data));
     },
