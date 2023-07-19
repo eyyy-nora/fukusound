@@ -1,5 +1,5 @@
 "use client";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { MdSearch } from "react-icons/md";
 import classes from "./SearchBar.module.css";
 import { apiClient } from "src/util/api-client";
