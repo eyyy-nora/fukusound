@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MdSearch } from "react-icons/md";
 import classes from "./SearchBar.module.css";
 import { apiClient } from "src/util/api-client";
@@ -16,13 +16,18 @@ function postSong(sound: Partial<Sound>) {
   return apiClient().post("/sounds", data);
 }
 
-export function SearchBar(props: SearchBarProps) {
+export function SearchBar({ onChange }: SearchBarProps) {
   const [search, setSearch] = useState("");
 
   const handler = (e: any) => {
     e.preventDefault();
-    postSong({ source: search }).then(() => location.reload());
+    if (/^https?:\/\//.test(search)) {
+      setSearch("");
+      postSong({ source: search }).then(() => location.reload());
+    }
   };
+
+  useEffect(() => onChange?.(search), [onChange, search]);
 
   return (
     <div className={classes.wrapper}>
