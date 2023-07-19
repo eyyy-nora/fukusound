@@ -27,7 +27,6 @@ import fs from "node:fs/promises";
 import { discord } from "src/init/discord";
 import { log } from "src/init/util";
 import { Mount } from "src/mount";
-import { bufferToStream } from "src/util/buffer-stream";
 import { EntityNotFoundError } from "typeorm";
 
 function bool(val: any) {
@@ -162,15 +161,17 @@ export class MediaController {
     @Param("id", intParser()) id: number,
     @Query("songId", intParser()) songId?: number,
   ) {
-    const { sounds } = await Playlist.findOne({
+    const playlist = await Playlist.findOne({
       where: { id, ownerId: user.discordId },
       relations: ["sounds"],
     });
+    const sounds = playlist.sounds;
     if (!Number.isFinite(songId)) songId = sounds[0].id;
     const player = await this.player(user.discordId, true);
     await player.playMany(
       sounds,
       sounds.findIndex(it => it.id === songId) ?? 0,
+      playlist,
     );
     return this.getNowPlaying(user);
   }
@@ -186,7 +187,6 @@ export class MediaController {
     });
     const player = await this.player(user.discordId, true);
     await player.queueMany(list.sounds);
-    player.playlist = list;
     return this.getNowPlaying(user);
   }
 
@@ -291,13 +291,15 @@ class MediaPlayer {
   async playOne(sound: Sound) {
     this.queue = [sound];
     this.index = 0;
+    this.playlist = undefined;
     await this.playSound(sound);
   }
 
-  async playMany(sounds: Sound[], index: number) {
+  async playMany(sounds: Sound[], index: number, playlist?: Playlist) {
     this.queue = sounds;
     this.index = index;
     this.media = this.queue[this.index];
+    this.playlist = playlist;
     if (this.media) await this.playSound(this.media);
   }
 
