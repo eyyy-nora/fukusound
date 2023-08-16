@@ -46,6 +46,12 @@ export class Sound extends BaseEntity {
   @Column("int", { default: 60000 })
   length: number;
 
+  @Column("int", { default: 48000 })
+  sampleRate: number;
+
+  @Column("int", { default: 2 })
+  channels: number;
+
   @Column("varchar")
   ownerId: string;
 

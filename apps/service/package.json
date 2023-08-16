@@ -5,13 +5,30 @@
   "since": 2022,
   "author": "Nora Reichwald <nora@reichwald.me> (https://reichwald.me/)",
   "license": "MIT",
-  "main": "dist/main.js",
-  "module": "dist/main.mjs",
-  "types": "dist/main.d.ts",
+  "exports": [
+    {
+      "node": "./",
+      "import": "dist/main.mjs",
+      "require": "dist/main.js",
+      "types": "dist/main.d.ts"
+    },
+    {
+      "node": "./example",
+      "import": "dist/example.mjs",
+      "require": "dist/example.js",
+      "types": "dist/example.d.ts"
+    },
+    {
+      "node": "./worker/youtube",
+      "import": "dist/media/download/youtube.mjs",
+      "require": "dist/media/download/youtube.js",
+      "types": "dist/media/download/youtube.d.ts"
+    }
+  ],
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
-    "start": "node dist/main.js",
+    "start": "node dist/example.js",
     "lint": "eslint --ext .ts,.tsx .",
     "lint:fix": "eslint --fix --ext .ts,.tsx ."
   },
